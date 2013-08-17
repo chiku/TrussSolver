@@ -1,7 +1,7 @@
-#include "cmatrix/matrix/matrix.h"
-#include "QUnit.hpp"
+#include "../vendor/cmatrix/matrix/matrix.h"
+#include "../vendor/qunit/QUnit.hpp"
 
-#include "truss.h"
+#include "../include/truss.h"
 #include "truss_test.h"
 
 void TrussTest::test_truss_three()

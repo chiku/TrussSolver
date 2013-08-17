@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
 
-#include "cmatrix/matrix/matrix.h"
+#include "../vendor/cmatrix/matrix/matrix.h"
 
-#include "truss.h"
+#include "../include/truss.h"
 
 Truss::Truss()
 {

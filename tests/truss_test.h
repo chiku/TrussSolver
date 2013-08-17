@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "QUnit.hpp"
+#include "../vendor/qunit/QUnit.hpp"
 
 #ifndef __TRUSS_SOLVER_TEST__
 #define __TRUSS_SOLVER_TEST__

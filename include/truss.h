@@ -4,7 +4,7 @@
 #include <fstream>
 #include <cmath>
 
-#include "cmatrix/matrix/matrix.h"
+#include "../vendor/cmatrix/matrix/matrix.h"
 
 #ifndef __TRUSS_H__
 #define __TRUSS_H__
