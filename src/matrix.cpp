@@ -1,6 +1,3 @@
-#include <iostream>
-#include <cmath>
-
 #include "cmatrix/matrix/matrix.h"
 
 using namespace std;
