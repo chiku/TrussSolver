@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+
 #include "matrix.cpp"
 
 #ifndef __TRUSS_H__
@@ -39,7 +40,7 @@ class Truss
 		double *length;
 		Matrix *locforce;
 		Matrix uglobal;
-				
+
 		void getData();	// accepts all input data
 		Truss();
 		~Truss();
@@ -47,7 +48,7 @@ class Truss
 		void findKGlobal();
 		void condense();
 		void solve();
-		
+
 		int members() { return total_members; };
 		int nodes() { return total_nodes; };
 		void modifyArea(double new_area[]);
@@ -72,7 +73,7 @@ Truss::Truss()
 void Truss::getData()
 {
 	int i, j;
-	ifstream F("truss.dat");
+	ifstream F("data/truss.dat");
 
 	total_members = 0; // the actual value is found in findKLocal()
 	// the number of nodes
@@ -204,7 +205,7 @@ void Truss::findKGlobal()
 				kglobal(j*2+1, i*2+1) += klocal[mem_no](3, 1);
 				kglobal(j*2+1, j*2  ) += klocal[mem_no](3, 2);
 				kglobal(j*2+1, j*2+1) += klocal[mem_no](3, 3);
-				
+
 				mem_no++;
 		 }
 }
@@ -249,7 +250,7 @@ void Truss::condense()
 				kglobalcond.mutateToInclude(temp(j, i), j, count_uknown);
 			count_uknown++;
 		}
-		
+
 	// unknown displacements at the bottom
 	for (i=0; i<2*total_nodes; i++)
 		if (knowledgeu[i]=='n')
@@ -336,38 +337,25 @@ void Truss::printMatrices()
 	int i;
 	cout <<"\n\nThe local k matrices are";
 	for (i=0; i<total_members; i++)
-		cout <<"\n\n\tklocal" <<i << klocal[i];
+		cout <<"\n\n\tklocal" <<i << "\n" << klocal[i];
 
 	cout <<"\n\n\nThe uncondensed global k matrix is\n" <<kglobal;
 	cout <<"\n\n\nThe condensed global k matrix is\n" <<kglobalcond;
 
-	cout <<"\n\n\n\t\tK11=" << k11 <<"\n\n\t\tK12=" << k12
-			<<"\n\n\t\tK21=" << k21 <<"\n\n\t\tK22=" << k22;
+	cout <<"\n\n\n\t\tK11=\n" << k11 <<"\n\n\t\tK12=\n" << k12
+			<<"\n\n\t\tK21=\n" << k21 <<"\n\n\t\tK22=\n" << k22;
 
-	cout <<"\n\nFknown=" <<Fknown;
-	cout <<"\n\nUknown=" <<uknown;
+	cout <<"\n\nFknown=\n" <<Fknown;
+	cout <<"\n\nUknown=\n" <<uknown;
 
-	cout <<"\n\n\nUunknown=" <<uunknown;
-	cout <<"\n\nFunknown=" <<Funknown;
+	cout <<"\n\n\nUunknown=\n" <<uunknown;
+	cout <<"\n\nFunknown=\n" <<Funknown;
 
 	cout <<"\n\n\nThe forces in the members are";
 	for (i=0; i<total_members; i++)
-		cout <<"\n\nMember #" <<i <<locforce[i];
-		
-	cout <<"\n\nThe global displacement matrix is" <<uglobal;
+		cout <<"\n\nMember #" <<i << "\n" <<locforce[i];
+
+	cout <<"\n\nThe global displacement matrix is\n" <<uglobal;
 }
 
 #endif
-
-/*
-int main()
-{
-	Truss T;
-	T.getData();
-	T.findKLocal();
-	T.findKGlobal();
-	T.condense();
-	T.solve();
-	T.printMatrices();
-}
-*/
