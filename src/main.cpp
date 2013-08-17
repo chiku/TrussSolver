@@ -1,4 +1,4 @@
-#include "truss.cpp"
+#include "truss.h"
 
 int main()
 {

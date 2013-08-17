@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "truss_test.h"
 
 int main() {
