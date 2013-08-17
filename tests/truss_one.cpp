@@ -1,3 +1,4 @@
+#include "cmatrix/matrix/matrix.h"
 #include "truss.cpp"
 
 #include "QUnit.hpp"

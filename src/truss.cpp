@@ -4,7 +4,7 @@
 #include <fstream>
 #include <cmath>
 
-#include "matrix.cpp"
+#include "cmatrix/matrix/matrix.h"
 
 #ifndef __TRUSS_H__
 #define __TRUSS_H__
@@ -26,10 +26,10 @@ class Truss
 	private:
 		int total_nodes, total_members;
 		Node *N;
-		Matrix force, displacement;
-		Matrix kglobal, kglobalcond, *klocal;
-		Matrix k11, k12, k21, k22;
-		Matrix Fknown, Funknown, uknown, uunknown;
+		CMatrix::Matrix<double> force, displacement;
+		CMatrix::Matrix<double> kglobal, kglobalcond, *klocal;
+		CMatrix::Matrix<double> k11, k12, k21, k22;
+		CMatrix::Matrix<double> Fknown, Funknown, uknown, uunknown;
 		double E;
 
 		char (*connectivity)[MAX];
@@ -38,8 +38,8 @@ class Truss
    public:
 		double *area;
 		double *length;
-		Matrix *locforce;
-		Matrix uglobal;
+		CMatrix::Matrix<double> *locforce;
+		CMatrix::Matrix<double> uglobal;
 
 		void getData(const char *file_name = "data/truss.dat");	// accepts all input data
 		Truss();
@@ -59,11 +59,11 @@ class Truss
 Truss::Truss()
 {
 	N = new Node[MAX];
-	klocal = new Matrix[MAX];
+	klocal = new CMatrix::Matrix<double>[MAX];
 	connectivity = new char[MAX][MAX];
 	knowledgeF = new char[MAX];
 	knowledgeu = new char[MAX];
-	locforce = new Matrix[MAX];
+	locforce = new CMatrix::Matrix<double>[MAX];
 	area = new double[MAX];
 	length = new double[MAX];
 }
@@ -216,7 +216,7 @@ void Truss::condense()
 {
 	int i, j;
 	int count_fknown=0, count_funknown=0, count_uknown=0, count_uunknown=0;
-	Matrix temp(total_nodes*2, total_nodes*2);	 // holds the force condensation
+	CMatrix::Matrix<double> temp(total_nodes*2, total_nodes*2);	 // holds the force condensation
 	kglobalcond.setSize(total_nodes*2, total_nodes*2);
 
 	// condensing for forces
@@ -288,12 +288,12 @@ void Truss::condense()
 
 void Truss::solve()
 {
-	Matrix k12inv = k12.invert();
+	CMatrix::Matrix<double> k12inv = k12.invert();
 	uunknown = k12inv * (Fknown - k11*uknown);
 	Funknown = k21*uknown + k22*uunknown;
 
 	int i, j;
-	Matrix ulocal;
+	CMatrix::Matrix<double> ulocal;
 	uglobal.setSize(2*total_nodes, 1);
 	ulocal.setSize(4, 1);
 
