@@ -39,4 +39,4 @@ build/truss_three_test.o: tests/truss_three_test.cpp tests/truss_test.h
 
 .PHONE: clean
 clean:
-	rm -rf main *.o build/*.o
+	rm -rf build/*.o build/main build/test_runner
