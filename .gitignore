@@ -1,3 +1,3 @@
-main
-test_runner
-*.o
+build/main
+build/test_runner
+build/*.o
