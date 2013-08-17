@@ -41,7 +41,7 @@ class Truss
 		Matrix *locforce;
 		Matrix uglobal;
 
-		void getData();	// accepts all input data
+		void getData(const char *file_name = "data/truss.dat");	// accepts all input data
 		Truss();
 		~Truss();
 		void findKLocal();
@@ -70,10 +70,10 @@ Truss::Truss()
 
 
 // accepts the input data
-void Truss::getData()
+void Truss::getData(const char *file_name)
 {
 	int i, j;
-	ifstream F("data/truss.dat");
+	ifstream F(file_name);
 
 	total_members = 0; // the actual value is found in findKLocal()
 	// the number of nodes

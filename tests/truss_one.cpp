@@ -6,7 +6,7 @@
 void TrussTest::test_truss_one()
 {
     Truss truss;
-    truss.getData();
+    truss.getData("data/truss.dat");
     truss.findKLocal();
     truss.findKGlobal();
     truss.condense();
