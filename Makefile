@@ -1,5 +1,5 @@
-CXX = g++
-CC  = gcc
+CXX ?= g++
+CC  ?= gcc
 
 CCFLAGS += -O2 -Wall
 CXXFLAGS += -O2 -Wall
