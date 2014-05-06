@@ -4,7 +4,7 @@
 #include <fstream>
 #include <cmath>
 
-#include "../vendor/cmatrix/matrix/matrix.h"
+#include "../vendor/cmatrix/src/matrix.h"
 
 #ifndef __TRUSS_H__
 #define __TRUSS_H__
@@ -26,10 +26,10 @@ class Truss
   private:
     int total_nodes, total_members;
     Node *N;
-    CMatrix::Matrix<double> force, displacement;
-    CMatrix::Matrix<double> kglobal, kglobalcond, *klocal;
-    CMatrix::Matrix<double> k11, k12, k21, k22;
-    CMatrix::Matrix<double> Fknown, Funknown, uknown, uunknown;
+    cmatrix::Matrix<double> force, displacement;
+    cmatrix::Matrix<double> kglobal, kglobalcond, *klocal;
+    cmatrix::Matrix<double> k11, k12, k21, k22;
+    cmatrix::Matrix<double> Fknown, Funknown, uknown, uunknown;
     double E;
 
     char (*connectivity)[MAX];
@@ -38,8 +38,8 @@ class Truss
    public:
     double *area;
     double *length;
-    CMatrix::Matrix<double> *locforce;
-    CMatrix::Matrix<double> uglobal;
+    cmatrix::Matrix<double> *locforce;
+    cmatrix::Matrix<double> uglobal;
 
     void getData(const char *file_name = "data/truss.dat"); // accepts all input data
     Truss();

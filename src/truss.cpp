@@ -1,18 +1,18 @@
 #include <iostream>
 #include <fstream>
 
-#include "../vendor/cmatrix/matrix/matrix.h"
+#include "../vendor/cmatrix/src/matrix.h"
 
 #include "../include/truss.h"
 
 Truss::Truss()
 {
 	N = new Node[MAX];
-	klocal = new CMatrix::Matrix<double>[MAX];
+	klocal = new cmatrix::Matrix<double>[MAX];
 	connectivity = new char[MAX][MAX];
 	knowledgeF = new char[MAX];
 	knowledgeu = new char[MAX];
-	locforce = new CMatrix::Matrix<double>[MAX];
+	locforce = new cmatrix::Matrix<double>[MAX];
 	area = new double[MAX];
 	length = new double[MAX];
 }
@@ -165,7 +165,7 @@ void Truss::condense()
 {
 	int i, j;
 	int count_fknown=0, count_funknown=0, count_uknown=0, count_uunknown=0;
-	CMatrix::Matrix<double> temp(total_nodes*2, total_nodes*2);	 // holds the force condensation
+	cmatrix::Matrix<double> temp(total_nodes*2, total_nodes*2);	 // holds the force condensation
 	kglobalcond.setSize(total_nodes*2, total_nodes*2);
 
 	// condensing for forces
@@ -237,12 +237,12 @@ void Truss::condense()
 
 void Truss::solve()
 {
-	CMatrix::Matrix<double> k12inv = k12.invert();
+	cmatrix::Matrix<double> k12inv = k12.invert();
 	uunknown = k12inv * (Fknown - k11*uknown);
 	Funknown = k21*uknown + k22*uunknown;
 
 	int i, j;
-	CMatrix::Matrix<double> ulocal;
+	cmatrix::Matrix<double> ulocal;
 	uglobal.setSize(2*total_nodes, 1);
 	ulocal.setSize(4, 1);
 
