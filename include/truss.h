@@ -1,9 +1,5 @@
 // Fem analysis of a 2D truss
 
-#include <iostream>
-#include <fstream>
-#include <cmath>
-
 #include "../vendor/cmatrix/src/matrix.h"
 
 #ifndef __TRUSS_H__
@@ -13,8 +9,8 @@ const int MAX = 30;
 
 struct Node
 {
-  double x;
-  double y; // (x, y) are the coordinates
+    double x;
+    double y; // (x, y) are the coordinates
 };
 
 
