@@ -38,7 +38,7 @@ public:
 
 private:
     int total_nodes, total_members;
-    Node *N;
+    Node *node;
     cmatrix::Matrix<double> force, displacement;
     cmatrix::Matrix<double> kglobal, kglobalcond, *klocal;
     cmatrix::Matrix<double> k11, k12, k21, k22;

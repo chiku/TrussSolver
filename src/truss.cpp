@@ -7,7 +7,7 @@
 
 Truss::Truss()
 {
-    N            = new Node[MAX];
+    node         = new Node[MAX];
     klocal       = new cmatrix::Matrix<double>[MAX];
     connectivity = new char[MAX][MAX];
     knowledgeF   = new char[MAX];
@@ -20,7 +20,7 @@ Truss::Truss()
 
 Truss::~Truss()
 {
-    delete[] N;
+    delete[] node;
     delete[] klocal;
     delete[] connectivity;
     delete[] knowledgeF;
@@ -52,7 +52,7 @@ void Truss::getData(const char *file_name)
 
     for (int i = 0; i < total_nodes; i++) {
         // coordinates of the nodes
-        file >> N[i].x >> N[i].y;
+        file >> node[i].x >> node[i].y;
         connectivity[i][i] = 'n';  // avoids node being connected to itself
 
         // input forces
@@ -111,9 +111,9 @@ void Truss::findKLocal()
     for(int i = 0; i < total_nodes; i++) {
         for(int j = i + 1; j < total_nodes; j++) {
             if(connectivity[i][j] == 'y' || connectivity[i][j] == 'Y') {
-                length[total_members] = len = sqrt ( (N[i].x-N[j].x)*(N[i].x-N[j].x) + (N[i].y-N[j].y)*(N[i].y-N[j].y) );
-                Cx = (N[j].x-N[i].x) / len;
-                Cy = (N[j].y-N[i].y) / len;
+                length[total_members] = len = sqrt ( (node[i].x-node[j].x)*(node[i].x-node[j].x) + (node[i].y-node[j].y)*(node[i].y-node[j].y) );
+                Cx = (node[j].x-node[i].x) / len;
+                Cy = (node[j].y-node[i].y) / len;
 
                 klocal[total_members].setSize(4, 4);
                 klocal[total_members](0, 0) = klocal[total_members](2, 2) = Cx*Cx/len;
