@@ -21,18 +21,6 @@ struct Node
 // implementing 2D Truss class
 class Truss
 {
-private:
-    int total_nodes, total_members;
-    Node *N;
-    cmatrix::Matrix<double> force, displacement;
-    cmatrix::Matrix<double> kglobal, kglobalcond, *klocal;
-    cmatrix::Matrix<double> k11, k12, k21, k22;
-    cmatrix::Matrix<double> Fknown, Funknown, uknown, uunknown;
-    double E;
-
-    char (*connectivity)[MAX];
-    char *knowledgeF, *knowledgeu;
-
 public:
     double *area;
     double *length;
@@ -51,6 +39,18 @@ public:
     int nodes() { return total_nodes; };
     void modifyArea(double new_area[]);
     void printMatrices();
+
+private:
+    int total_nodes, total_members;
+    Node *N;
+    cmatrix::Matrix<double> force, displacement;
+    cmatrix::Matrix<double> kglobal, kglobalcond, *klocal;
+    cmatrix::Matrix<double> k11, k12, k21, k22;
+    cmatrix::Matrix<double> Fknown, Funknown, uknown, uunknown;
+    double E;
+
+    char (*connectivity)[MAX];
+    char *knowledgeF, *knowledgeu;
 };
 
 #endif
