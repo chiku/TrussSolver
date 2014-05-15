@@ -9,8 +9,6 @@
 #ifndef __TRUSS_H__
 #define __TRUSS_H__
 
-using namespace std;
-
 const int MAX = 30;
 
 struct Node
