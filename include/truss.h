@@ -41,7 +41,7 @@ class Truss
     cmatrix::Matrix<double> *locforce;
     cmatrix::Matrix<double> uglobal;
 
-    void getData(const char *file_name = "data/truss.dat"); // accepts all input data
+    void getData(const char *file_name); // accepts all input data
     Truss();
     ~Truss();
     void findKLocal();

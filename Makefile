@@ -8,13 +8,11 @@ all: compile
 
 compile: build/main
 
-test: build/test
+test: build/test_runner
+	./build/test_runner
 
 build/main: build/main.o build/truss.o
 	${CXX} -o $@ $^ ${CXXFLAGS} ${LDFLAGS}
-
-build/test: build/test_runner
-	./build/test_runner
 
 build/test_runner: build/test_suite.o build/truss.o build/truss_one_test.o build/truss_two_test.o build/truss_three_test.o
 	${CXX} -o $@ $^ ${CXXFLAGS} ${LDFLAGS}

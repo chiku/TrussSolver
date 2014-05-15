@@ -2,11 +2,11 @@
 
 int main()
 {
-  Truss T;
-  T.getData();
-  T.findKLocal();
-  T.findKGlobal();
-  T.condense();
-  T.solve();
-  T.printMatrices();
+  Truss truss;
+  truss.getData("data/truss1.dat");
+  truss.findKLocal();
+  truss.findKGlobal();
+  truss.condense();
+  truss.solve();
+  truss.printMatrices();
 }
