@@ -1,5 +1,5 @@
 #include "../vendor/cmatrix/src/matrix.h"
-#include "../vendor/qunit/QUnit.hpp"
+#include "QUnit.hpp"
 
 #include "../include/truss.h"
 #include "truss_test.h"
