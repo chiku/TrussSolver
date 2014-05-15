@@ -21,7 +21,7 @@ struct Node
 // implementing 2D Truss class
 class Truss
 {
-  private:
+private:
     int total_nodes, total_members;
     Node *N;
     cmatrix::Matrix<double> force, displacement;
@@ -33,7 +33,7 @@ class Truss
     char (*connectivity)[MAX];
     char *knowledgeF, *knowledgeu;
 
-   public:
+public:
     double *area;
     double *length;
     cmatrix::Matrix<double> *locforce;

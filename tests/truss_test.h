@@ -13,12 +13,12 @@ private:
     void test_truss_one();
     void test_truss_two();
     void test_truss_three();
+
 public:
+    TrussTest(std::ostream &out, int verboseLevel = QUnit::verbose) : qunit(out, verboseLevel) { }
 
-    TrussTest(std::ostream &out, int verboseLevel = QUnit::verbose)
-        : qunit(out, verboseLevel) {}
-
-    int run() {
+    int run()
+    {
         test_truss_one();
         test_truss_two();
         test_truss_three();
