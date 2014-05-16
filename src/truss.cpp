@@ -273,7 +273,7 @@ void Truss::solve()
 
     a = 0;
     for (int i = 0; i < total_nodes-1; i++) {
-     // find all local displacement matrices
+        // find all local displacement matrices
         for (int j = i + 1; j < total_nodes; j++) {
             if (connectivity[i][j] == 'y') {
                 ulocal(0, 0) = uglobal(2*i  , 0);
@@ -300,27 +300,27 @@ void Truss::modifyArea(double new_area[])
 // prints all the matrices
 void Truss::printMatrices()
 {
-    std::cout <<"\n\nThe local k matrices are";
-    for (int i = 0; i<total_members; i++) {
-        std::cout <<"\n\n\tklocal" <<i << "\n" << klocal[i];
+    std::cout << "\n\nThe local k matrices are";
+    for (int i = 0; i < total_members; i++) {
+        std::cout << "\n\n\tklocal" << i << "\n" << klocal[i];
     }
 
-    std::cout <<"\n\n\nThe uncondensed global k matrix is\n" <<kglobal;
-    std::cout <<"\n\n\nThe condensed global k matrix is\n" <<kglobalcond;
+    std::cout << "\n\n\nThe uncondensed global k matrix is\n" << kglobal;
+    std::cout << "\n\n\nThe condensed global k matrix is\n" << kglobalcond;
 
-    std::cout <<"\n\n\n\t\tK11 = \n" << k11 <<"\n\n\t\tK12 = \n" << k12
-            <<"\n\n\t\tK21 = \n" << k21 <<"\n\n\t\tK22 = \n" << k22;
+    std::cout << "\n\n\n\t\tK11 = \n" << k11 << "\n\n\t\tK12 = \n" << k12
+            << "\n\n\t\tK21 = \n" << k21 << "\n\n\t\tK22 = \n" << k22;
 
-    std::cout <<"\n\nFknown = \n" <<Fknown;
-    std::cout <<"\n\nUknown = \n" <<uknown;
+    std::cout << "\n\nFknown = \n" << Fknown;
+    std::cout << "\n\nUknown = \n" << uknown;
 
-    std::cout <<"\n\n\nUunknown = \n" <<uunknown;
-    std::cout <<"\n\nFunknown = \n" <<Funknown;
+    std::cout << "\n\n\nUunknown = \n" << uunknown;
+    std::cout << "\n\nFunknown = \n" << Funknown;
 
-    std::cout <<"\n\n\nThe forces in the members are";
-    for (int i = 0; i<total_members; i++) {
-        std::cout <<"\n\nMember #" <<i << "\n" <<locforce[i];
+    std::cout << "\n\n\nThe forces in the members are";
+    for (int i = 0; i < total_members; i++) {
+        std::cout << "\n\nMember #" << i << "\n" << locforce[i];
     }
 
-    std::cout <<"\n\nThe global displacement matrix is\n" <<uglobal;
+    std::cout << "\n\nThe global displacement matrix is\n" << uglobal;
 }
