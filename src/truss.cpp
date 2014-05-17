@@ -3,7 +3,7 @@
 
 #include "../vendor/cmatrix/src/matrix.h"
 
-#include "../include/truss.h"
+#include "truss.h"
 
 Truss::Truss()
 {

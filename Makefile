@@ -4,6 +4,8 @@ CC  ?= gcc
 CCFLAGS += -O2 -Wall
 CXXFLAGS += -O2 -Wall
 
+CXXFLAGS += -Iinclude
+
 OBJDIR := build
 
 all: compile
@@ -14,13 +16,16 @@ test: $(OBJDIR)/test_runner
 	./$(OBJDIR)/test_runner
 
 $(OBJDIR)/%.o: %.cpp
-	${CXX} -c -o $@ $< ${CXXFLAGS} ${LDFLAGS}
+	${CXX} ${CXXFLAGS} -c -o $@ $<
+
+$(OBJDIR)/%: $(OBJDIR)/%.o
+	${CXX} ${CXXFLAGS} ${LDFLAGS} -c -o $@ $<
 
 $(OBJDIR)/main: $(OBJDIR)/src/main.o $(OBJDIR)/src/truss.o
-	${CXX} -o $@ $^ ${CXXFLAGS} ${LDFLAGS}
+	${CXX} ${CXXFLAGS} ${LDFLAGS} -o $@ $^
 
 $(OBJDIR)/test_runner: $(OBJDIR)/tests/test_suite.o $(OBJDIR)/src/truss.o $(OBJDIR)/tests/truss_one_test.o $(OBJDIR)/tests/truss_two_test.o $(OBJDIR)/tests/truss_three_test.o
-	${CXX} -o $@ $^ ${CXXFLAGS} ${LDFLAGS}
+	${CXX} ${CXXFLAGS} ${LDFLAGS} -o $@ $^
 
 $(OBJDIR)/src/main.o: src/main.cpp include/truss.h
 $(OBJDIR)/src/truss.o: src/truss.cpp include/truss.h
