@@ -41,6 +41,6 @@ $(OBJDIR)/tests/truss_two_test.o: tests/truss_two_test.cpp tests/truss_test.h | 
 $(OBJDIR)/tests/truss_three_test.o: tests/truss_three_test.cpp tests/truss_test.h | $(OBJDIR)/tests
 
 clean:
-	rm -rf $(OBJDIR)/*/*.o $(OBJDIR)/main $(OBJDIR)/test_runner
+	rm -rf $(OBJDIR)
 
 .PHONY: all compile test clean
