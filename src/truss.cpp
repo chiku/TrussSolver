@@ -97,8 +97,6 @@ void Truss::getData(const char *file_name)
     // The value of E
     file >> E;
     file.close();
-
-    findKLocal(); // now the number of members present is known
 }
 
 
