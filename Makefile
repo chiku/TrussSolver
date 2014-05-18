@@ -24,9 +24,6 @@ $(OBJDIR)/tests:
 $(OBJDIR)/%.o: %.cpp
 	${CXX} ${CXXFLAGS} -c -o $@ $<
 
-$(OBJDIR)/%: $(OBJDIR)/%.o
-	${CXX} ${CXXFLAGS} ${LDFLAGS} -c -o $@ $<
-
 $(OBJDIR)/main: $(OBJDIR)/src/main.o $(OBJDIR)/src/truss.o
 	${CXX} ${CXXFLAGS} ${LDFLAGS} -o $@ $^
 
