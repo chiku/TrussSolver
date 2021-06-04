@@ -1,6 +1,7 @@
 TrussSolver
 ===========
 
-[![Build Status](https://travis-ci.org/chiku/TrussSolver.svg?branch=master)](https://travis-ci.org/chiku/TrussSolver)
+![Build Status](https://github.com/chiku/cmatrix/actions/workflows/build.yml/badge.svg)
+
 
 Solve a truss
