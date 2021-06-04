@@ -1,6 +1,6 @@
 // Fem analysis of a 2D truss
 
-#include "../vendor/cmatrix/src/matrix.h"
+#include "cmatrix/src/matrix.h"
 
 #ifndef __TRUSS_H__
 #define __TRUSS_H__

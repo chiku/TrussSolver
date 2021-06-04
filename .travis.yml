@@ -1,7 +1,0 @@
-language: cpp
-compiler:
-  - gcc
-  - clang
-script:
-  - make clean
-  - make test -j4

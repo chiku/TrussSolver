@@ -1,43 +1,50 @@
+# Written by     : Chirantan Mitra
+
+CC ?= gcc
 CXX ?= g++
-CC  ?= gcc
 
-CCFLAGS += -O2 -Wall
-CXXFLAGS += -O2 -Wall
+CFLAGS += -O2
+CXXFLAGS += -O2
 
-CXXFLAGS += -Iinclude
+INCLUDES += -Iinclude -Ivendor
 
-OBJDIR := build
+HEADER_FILES = $(shell find include -name *.h)
+SOURCE_FILES = $(shell find src -name *.cpp)
+TEST_FILES = $(shell find tests -name *.cpp)
 
-all: compile
+SOURCE_OBJ_FILES = $(shell echo ${SOURCE_FILES} | sed 's/src/build/g' | sed 's/\.cpp/\.o/g')
+TEST_OBJ_FILES = $(shell echo ${TEST_FILES} | sed 's/tests/build\/tests/g' | sed 's/\.cpp/\.o/g')
 
-compile: $(OBJDIR)/main
+all: test compile demo
+.PHONY: all
 
-test: $(OBJDIR)/test_runner
-	./$(OBJDIR)/test_runner
+compile: build/truss_solver
+.PHONY: compile
 
-$(OBJDIR)/src:
-	mkdir -p $@
+demo: compile
+	./build/truss_solver
+.PHONY: demo
 
-$(OBJDIR)/tests:
-	mkdir -p $@
-
-$(OBJDIR)/%.o: %.cpp
-	${CXX} ${CXXFLAGS} -c -o $@ $<
-
-$(OBJDIR)/main: $(OBJDIR)/src/main.o $(OBJDIR)/src/truss.o
-	${CXX} ${CXXFLAGS} ${LDFLAGS} -o $@ $^
-
-$(OBJDIR)/test_runner: $(OBJDIR)/tests/test_suite.o $(OBJDIR)/src/truss.o $(OBJDIR)/tests/truss_one_test.o $(OBJDIR)/tests/truss_two_test.o $(OBJDIR)/tests/truss_three_test.o
-	${CXX} ${CXXFLAGS} ${LDFLAGS} -o $@ $^
-
-$(OBJDIR)/src/main.o: src/main.cpp include/truss.h | $(OBJDIR)/src
-$(OBJDIR)/src/truss.o: src/truss.cpp include/truss.h | $(OBJDIR)/src
-$(OBJDIR)/tests/test_suite.o: tests/test_suite.cpp tests/truss_test.h | $(OBJDIR)/tests
-$(OBJDIR)/tests/truss_one_test.o: tests/truss_one_test.cpp tests/truss_test.h | $(OBJDIR)/tests
-$(OBJDIR)/tests/truss_two_test.o: tests/truss_two_test.cpp tests/truss_test.h | $(OBJDIR)/tests
-$(OBJDIR)/tests/truss_three_test.o: tests/truss_three_test.cpp tests/truss_test.h | $(OBJDIR)/tests
+test: build/tests/truss_test
+	./build/tests/truss_test
+.PHONY: test
 
 clean:
-	rm -rf $(OBJDIR)
+	rm -rf build/
+.PHONY: clean
 
-.PHONY: all compile test clean
+build/truss_solver: $(SOURCE_FILES)
+	mkdir -pv $(@D)
+	$(CXX) $^ $(LDFLAGS) $(INCLUDES) -o $@
+
+build/tests/truss_test: build/truss.o $(TEST_OBJ_FILES)
+	@mkdir -pv $(@D)
+	$(CXX) $^ $(LDFLAGS) -o $@
+
+build/%.o: src/%.cpp $(HEADER_FILES)
+	@mkdir -pv $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+build/tests/%.o: tests/%.cpp $(HEADER_FILES)
+	@mkdir -pv $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "../vendor/cmatrix/src/matrix.h"
+#include "cmatrix/src/matrix.h"
 
 #include "truss.h"
 

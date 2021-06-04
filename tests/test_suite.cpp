@@ -1,7 +1,3 @@
-#include <iostream>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
-#include "truss_test.h"
-
-int main() {
-    return TrussTest(std::cerr).run();
-}
+#include "doctest/doctest.h"
