@@ -29,11 +29,14 @@ jobs:
 
       - name: Environment
         run: |
-          git submodule update --init --recursive
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
           echo cc: ${{ matrix.config.cc }}
           echo cxx: ${{ matrix.config.cxx }}
+
+      - name: Submodules
+        run: |
+          git submodule update --init --recursive
 
       - name: Test
         shell: bash
