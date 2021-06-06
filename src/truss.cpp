@@ -1,9 +1,30 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <cstring>
 
 #include "cmatrix/src/matrix.h"
 
 #include "truss.h"
+
+std::string read_file(const char *file_name)
+{
+    std::string file_contents;
+    std::ifstream file(file_name);
+    if (file.fail()) {
+        throw new std::runtime_error(std::string("File ") + std::string(file_name) + std::string(": ") + strerror(errno));
+    }
+
+    file.seekg(0, std::ios::end);
+    file_contents.reserve(file.tellg());
+    file.seekg(0, std::ios::beg);
+
+    file_contents.assign((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+    file.close();
+
+    return file_contents;
+}
 
 Truss::Truss()
 {
@@ -32,9 +53,9 @@ Truss::~Truss()
 
 
 // accepts the input data
-void Truss::getData(const char *file_name)
+void Truss::getData(const std::string file_contents)
 {
-    std::ifstream file(file_name);
+    std::stringstream file(file_contents);
 
     total_members = 0; // the actual value is found in findKLocal()
     // the number of nodes
@@ -96,7 +117,6 @@ void Truss::getData(const char *file_name)
     }
     // The value of E
     file >> E;
-    file.close();
 }
 
 
@@ -121,7 +141,7 @@ void Truss::findKLocal()
                 klocal[total_members](0, 1) = klocal[total_members](1, 0) =
                         klocal[total_members](3, 2) = klocal[total_members](2, 3) = Cx*Cy/len;
                 klocal[total_members](3, 0) = klocal[total_members](0, 3) =
-                        klocal[total_members](1, 2) = klocal[total_members](2, 1) =  -Cx*Cy/len;
+                        klocal[total_members](1, 2) = klocal[total_members](2, 1) = -Cx*Cy/len;
                 klocal[total_members] = klocal[total_members].scale(E*area[total_members]);
                 total_members++;
             }

@@ -7,7 +7,7 @@
 TEST_CASE("Truss 3")
 {
     Truss truss;
-    truss.getData("data/truss3.dat");
+    truss.getData(read_file("data/truss3.dat"));
     truss.findKLocal();
     truss.findKGlobal();
     truss.condense();

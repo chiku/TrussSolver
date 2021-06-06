@@ -1,5 +1,7 @@
 // Fem analysis of a 2D truss
 
+#include <string>
+
 #include "cmatrix/src/matrix.h"
 
 #ifndef __TRUSS_H__
@@ -13,6 +15,7 @@ struct Node
     double y; // (x, y) are the coordinates
 };
 
+std::string read_file(const char *file_name);
 
 // implementing 2D Truss class
 class Truss
@@ -23,9 +26,9 @@ public:
     cmatrix::Matrix<double> *locforce;
     cmatrix::Matrix<double> uglobal;
 
-    void getData(const char *file_name); // accepts all input data
     Truss();
     ~Truss();
+    void getData(const std::string file_data); // accepts all input data
     void findKLocal();
     void findKGlobal();
     void condense();
