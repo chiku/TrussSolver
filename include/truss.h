@@ -1,6 +1,7 @@
 // Fem analysis of a 2D truss
 
 #include <string>
+#include <ostream>
 
 #include "cmatrix/src/matrix.h"
 
@@ -37,7 +38,8 @@ public:
     int members() { return total_members; };
     int nodes() { return total_nodes; };
     void modifyArea(double new_area[]);
-    void printMatrices();
+    friend std::ostream & operator << (std::ostream &out, const Truss &truss);
+
 
 private:
     int total_nodes, total_members;

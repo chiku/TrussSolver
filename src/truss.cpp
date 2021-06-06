@@ -1,4 +1,4 @@
-#include <iostream>
+#include <ostream>
 #include <fstream>
 #include <string>
 #include <cstring>
@@ -315,30 +315,31 @@ void Truss::modifyArea(double new_area[])
     }
 }
 
-// prints all the matrices
-void Truss::printMatrices()
+std::ostream & operator << (std::ostream &out, const Truss &truss)
 {
-    std::cout << "\n\nThe local k matrices are";
-    for (int i = 0; i < total_members; i++) {
-        std::cout << "\n\n\tklocal" << i << "\n" << klocal[i];
+    out << "\n\nThe local k matrices are";
+    for (int i = 0; i < truss.total_members; i++) {
+        out << "\n\n\tklocal" << i << "\n" << truss.klocal[i];
     }
 
-    std::cout << "\n\n\nThe uncondensed global k matrix is\n" << kglobal;
-    std::cout << "\n\n\nThe condensed global k matrix is\n" << kglobalcond;
+    out << "\n\n\nThe uncondensed global k matrix is\n" << truss.kglobal;
+    out << "\n\n\nThe condensed global k matrix is\n" << truss.kglobalcond;
 
-    std::cout << "\n\n\n\t\tK11 = \n" << k11 << "\n\n\t\tK12 = \n" << k12
-            << "\n\n\t\tK21 = \n" << k21 << "\n\n\t\tK22 = \n" << k22;
+    out << "\n\n\n\t\tK11 = \n" << truss.k11 << "\n\n\t\tK12 = \n" << truss.k12
+            << "\n\n\t\tK21 = \n" << truss.k21 << "\n\n\t\tK22 = \n" << truss.k22;
 
-    std::cout << "\n\nFknown = \n" << Fknown;
-    std::cout << "\n\nUknown = \n" << uknown;
+    out << "\n\nFknown = \n" << truss.Fknown;
+    out << "\n\nUknown = \n" << truss.uknown;
 
-    std::cout << "\n\n\nUunknown = \n" << uunknown;
-    std::cout << "\n\nFunknown = \n" << Funknown;
+    out << "\n\n\nUunknown = \n" << truss.uunknown;
+    out << "\n\nFunknown = \n" << truss.Funknown;
 
-    std::cout << "\n\n\nThe forces in the members are";
-    for (int i = 0; i < total_members; i++) {
-        std::cout << "\n\nMember #" << i << "\n" << locforce[i];
+    out << "\n\n\nThe forces in the members are";
+    for (int i = 0; i < truss.total_members; i++) {
+        out << "\n\nMember #" << i << "\n" << truss.locforce[i];
     }
 
-    std::cout << "\n\nThe global displacement matrix is\n" << uglobal;
+    out << "\n\nThe global displacement matrix is\n" << truss.uglobal;
+
+    return out;
 }

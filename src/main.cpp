@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "truss.h"
 
 int main()
@@ -8,5 +10,5 @@ int main()
     truss.findKGlobal();
     truss.condense();
     truss.solve();
-    truss.printMatrices();
+    std::cout << truss;
 }
