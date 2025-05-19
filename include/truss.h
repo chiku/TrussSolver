@@ -16,7 +16,7 @@ struct Node
     double y; // (x, y) are the coordinates
 };
 
-std::string read_file(const std::string file_name);
+std::string read_truss_file(const std::string file_name);
 
 // implementing 2D Truss class
 class Truss
