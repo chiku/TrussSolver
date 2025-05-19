@@ -7,7 +7,7 @@
 
 #include "truss.h"
 
-std::string read_file(const char *file_name)
+std::string read_file(const std::string file_name)
 {
     std::string file_contents;
     std::ifstream file(file_name);
